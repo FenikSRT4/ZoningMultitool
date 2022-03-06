@@ -18,34 +18,7 @@ namespace ZoningMultitool
         /// </summary>
         public void OnSettingsUI(UIHelperBase helper)
         {
-            // Setup options panel reference.
-            //Options.optionsPanel = ((UIHelper)helper).self as UIScrollablePanel;
-            //Options.optionsPanel.autoLayout = false;
-            var group = helper.AddGroup(Name) as UIHelper;
-            var panel = group.self as UIPanel;
-        }
-
-        public void OnDisabled()
-        {
-            //Harmony Unpatch
-        }
-
-        public void OnEnabled()
-        {
-            //Load Settings
-            //Harmony Patch
-
-            // Attaching options panel event hook - check to see if UIView is ready.
-            if (UIView.GetAView() != null)
-            {
-                // It's ready - attach the hook now.
-                Options.OptionsPanelHook();
-            }
-            else
-            {
-                // Otherwise, queue the hook for when the intro's finished loading.
-                LoadingManager.instance.m_introLoaded += Options.OptionsPanelHook;
-            }
+            Options.createZMOptionPanel(Name, helper as UIHelper);
         }
     }
 }
